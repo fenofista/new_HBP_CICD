@@ -32,6 +32,7 @@ jobs:
       run : |
         cd C:\Users\oplab\Desktop\new_HBP_CICD
         git pull origin main
+        ls
     - name: Infernece
       run : |
         python Program/inference_code/XGB_inference.py
