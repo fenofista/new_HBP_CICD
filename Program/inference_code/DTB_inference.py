@@ -6,7 +6,7 @@ from sklearn.metrics import accuracy_score
 model = joblib.load('TCHC_CV_model/DTB_model.joblib')
 
 # Load the testing data from the CSV file
-test_data = pd.read_csv('T_for_AINA_2022.csv')
+test_data = pd.read_csv('user_data/T_for_AINA_2022.csv')
 
 # Extract the features from the testing data
 X_test = test_data.drop('CV', axis=1)  # Assuming 'label' column is the target variable
