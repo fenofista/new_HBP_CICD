@@ -16,8 +16,8 @@ jobs:
  
     steps:
     - uses: actions/checkout@v3
-      with:
-        token: ${{ secrets.GH_TOKEN_TEST }}
+#       with:
+#         token: ${{ secrets.GH_TOKEN_TEST }}
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
