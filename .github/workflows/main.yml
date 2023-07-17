@@ -35,12 +35,13 @@ jobs:
         ls
     - name: Infernece
       run : |
+        cd C:\Users\oplab\Desktop\new_HBP_CICD/Program/inference_code/
         python Program/inference_code/XGB_inference.py
         python Program/inference_code/RF_inference.py
         python Program/inference_code/DTB_inference.py
-        cd ..
     - name: commit
       run: |
+          cd C:\Users\oplab\Desktop\new_HBP_CICD/
           git config --local user.email "s960068sss@github.com"
           git config --local user.name "fenofista"
           git add result
