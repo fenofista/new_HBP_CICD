@@ -31,6 +31,7 @@ jobs:
     - name: pull_data
       run : |
         cd C:\Users\oplab\Desktop\new_HBP_CICD
+        git checkout inference
         git pull origin inference
         ls
     - name: Infernece
@@ -45,11 +46,11 @@ jobs:
           git config --local user.name "fenofista"
           git add result
           git commit -m "inference"
-          git switch result
+          git switch inference_result
           git checkout inference result
           git add result
           git commit -m "inference"
-          git push origin result
+          git push origin inference_result
 #     - name: CD
 #       run: |
 #           cd C:\Users\oplab\Desktop\CICD_test
