@@ -47,6 +47,8 @@ jobs:
           git commit -m "inference"
           git switch result
           git checkout main result
+          git add result
+          git commit -m "inference"
           git push origin result
 #     - name: CD
 #       run: |
