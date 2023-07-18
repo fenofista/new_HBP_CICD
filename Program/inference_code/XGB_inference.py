@@ -38,6 +38,6 @@ import os
 if not os.path.exists("C:/Users/oplab/Desktop/new_HBP_CICD/result"):
     os.mkdir("C:/Users/oplab/Desktop/new_HBP_CICD/result")
 result = pd.DataFrame(result)
-result.to_csv("C:/Users/oplab/Desktop/new_HBP_CICD/result/RF_result.csv", index=False)
+result.to_csv("C:/Users/oplab/Desktop/new_HBP_CICD/result/XGB_result.csv", index=False)
 
 print("Accuracy:", accuracy)
