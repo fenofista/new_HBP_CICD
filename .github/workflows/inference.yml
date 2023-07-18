@@ -31,7 +31,7 @@ jobs:
     - name: pull_data
       run : |
         cd C:\Users\oplab\Desktop\new_HBP_CICD
-        git pull origin main
+        git pull origin inference
         ls
     - name: Infernece
       run : |
