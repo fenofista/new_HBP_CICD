@@ -20,14 +20,21 @@ y_true = test_data['CV']
 # Compute the accuracy of the model
 accuracy = accuracy_score(y_true, y_pred)
 
+id_arr=[]
+for i in range(len(y_pred)):
+    id_arr.append(i)
+
+
+
+
 result = {
-    "model_name":["DTB"],
-    "Accuracy":[accuracy]
+    "patient_id":id_arr,
+    "pred":y_pred
 }
 import os
-if not os.path.exists("result"):
-    os.mkdir("result")
+if not os.path.exists("C:/Users/oplab/Desktop/new_HBP_CICD/result"):
+    os.mkdir("C:/Users/oplab/Desktop/new_HBP_CICD/result")
 result = pd.DataFrame(result)
-result.to_csv("result/DTB_result.csv", index=False)
+result.to_csv("C:/Users/oplab/Desktop/new_HBP_CICD/result/RF_result.csv", index=False)
 
 print("Accuracy:", accuracy)
