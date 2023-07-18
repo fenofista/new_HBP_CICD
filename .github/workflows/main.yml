@@ -45,6 +45,8 @@ jobs:
           git config --local user.name "fenofista"
           git add result
           git commit -m "inference"
+          git switch result
+          git checkout main result
           git push origin result
 #     - name: CD
 #       run: |
