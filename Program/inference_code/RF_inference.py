@@ -21,9 +21,16 @@ y_true = test_data['CV']
 # Compute the accuracy of the model
 accuracy = accuracy_score(y_true, y_pred)
 
+id_arr=[]
+for i in range(len(y_pred)):
+    id_arr.append(i)
+
+
+
+
 result = {
-    "model_name":["RF"],
-    "Accuracy":[accuracy]
+    "patient_id":id_arr,
+    "pred":y_pred
 }
 import os
 if not os.path.exists("C:/Users/oplab/Desktop/new_HBP_CICD/result"):
