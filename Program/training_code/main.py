@@ -26,7 +26,7 @@ file_names = cfg['file_names']
 
 # In[] 產出一個類別檔案的不同時間段(四個長期or四個中短期)之X, y
 def makeXandY(dataName):
-    data = pd.read_csv(dataName)
+    data = pd.read_csv("C:/Users/oplab/Desktop/new_HBP_CICD/user_data/"+dataName)
     col = [i for i in range(data.shape[1])]
     col.pop(-1)
     X = data.iloc[:, col]
