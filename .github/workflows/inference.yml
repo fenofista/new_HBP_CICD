@@ -45,11 +45,11 @@ jobs:
           git config --local user.name "fenofista"
           git add result
           git commit -m "inference"
-          git switch result
+          git switch inference_result
           git checkout inference result
           git add result
           git commit -m "inference"
-          git push origin result
+          git push origin inference_result
 #     - name: CD
 #       run: |
 #           cd C:\Users\oplab\Desktop\CICD_test
