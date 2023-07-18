@@ -1,0 +1,42 @@
+name: Hight_blood_pressure CICD
+permissions: write-all
+# 觸發條件
+on:
+  push:
+    branches: [ training]
+ 
+# 執行一項或多項任務
+jobs:
+  build:
+    runs-on: [self-hosted, Windows, X64]
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.7]
+ 
+    steps:
+    - uses: actions/checkout@v3
+#       with:
+#         token: ${{ secrets.GH_TOKEN_TEST }}
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+ 
+    # 建立環境
+    - name: Install Dependencies
+      run: |
+        cd C:\Users\oplab\Desktop\new_HBP_CICD
+        python -m pip install --upgrade pip
+        pip install -r Program/requirement.txt
+    - name: pull_data
+      run : |
+        cd C:\Users\oplab\Desktop\new_HBP_CICD
+        git checkout training
+        git pull origin training
+        ls
+    - name: CD
+      run: |
+          cd C:\Users\oplab\Desktop\new_HBP_CICD
+          git checkout training
+          python C:\Users\oplab\Desktop\new_HBP_CICD\Program\training_code\main.py
