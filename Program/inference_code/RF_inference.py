@@ -17,7 +17,7 @@ y_pred = model.predict(X_test)
 
 # Extract the actual labels from the testing data
 y_true = test_data['CV']
-
+accuracy = accuracy_score(y_true, y_pred)
 # Compute the accuracy of the model
 id_arr=[]
 for i in range(len(y_pred)):
