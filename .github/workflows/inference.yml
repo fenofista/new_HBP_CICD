@@ -3,7 +3,7 @@ permissions: write-all
 # 觸發條件
 on:
   push:
-    branches: [ Inference ]
+    branches: [ inference ]
  
 # 執行一項或多項任務
 jobs:
