@@ -235,6 +235,7 @@ def aTimeingThreePredictions(c_list, sm, X, y, timing, threshold):
     #以三個不同的classifier去做預測
     title_names = ["ROC curve of XGB", "ROC curve of RF", "ROC curve of DTB"]
     now = ["XBG", "RF", "DTB"]
+    # ttt=None
     for i in range(len(c_list)):
         print("now processing: ", now[i])
         logging.info(f"now processing: {now[i]}")
