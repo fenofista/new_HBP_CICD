@@ -25,7 +25,8 @@ test_data["temp"] = pd.to_numeric(test_data["temp"])
 X_test = test_data.drop('CV', axis=1) 
 
 # Make predictions on the testing data
-y_pred = model.predict(xgb.DMatrix(X_test))
+# y_pred = model.predict(xgb.DMatrix(X_test))
+y_pred = model.predict((X_test))
 
 # Convert the predicted values to binary labels (if necessary)
 y_pred = [1 if pred > 0.5 else 0 for pred in y_pred]
