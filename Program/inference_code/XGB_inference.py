@@ -1,11 +1,12 @@
 import xgboost as xgb
 import pandas as pd
 from sklearn.metrics import accuracy_score
-
+import pickle
 # Load the XGBoost model from the bst file
 model = xgb.Booster()
-model.load_model('C:/Users/oplab/Desktop/new_HBP_CICD/models/XBG_model.pkl')
-
+# model.load_model('C:/Users/oplab/Desktop/new_HBP_CICD/models/XBG_model.pkl')
+with open('C:/Users/oplab/Desktop/new_HBP_CICD/models/XBG_model.pkl', 'rb') as f:
+    model = pickle.load(f)
 # Load the testing data from the CSV file
 test_data = pd.read_csv('C:/Users/oplab/Desktop/new_HBP_CICD/user_data/T_for_AINA_2022_20230731.csv')
 drop_index=[]
