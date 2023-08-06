@@ -19,6 +19,7 @@ from sklearn.metrics import RocCurveDisplay
 from sklearn.model_selection import StratifiedKFold
 import time
 import logging
+import pickle
 
 n_sample = 7
 n_splits = 3
@@ -42,7 +43,8 @@ def Print10foldScoreSmoteandDraw(classifier, sm, X, y, title, year, testsmResult
     fn = 0
     tn = 0
     fold_infos = dict()
-    
+    max_acc=0
+    best_model=None
     #feature importance default setting
     cols = X.columns
     feature_importances = dict()
@@ -97,6 +99,9 @@ def Print10foldScoreSmoteandDraw(classifier, sm, X, y, title, year, testsmResult
         
         #calculate metrics
         accuracy = accuracy_score(y_test, predicted_y)
+        if max_acc<accuracy:
+            max_acc=accuracy
+            best_model=classifier
         precision = precision_score(y_test, predicted_y, average="macro")
         recall = recall_score(y_test, predicted_y, average="macro")
         f1 = f1_score(y_test, predicted_y, average="macro")
@@ -203,7 +208,7 @@ def Print10foldScoreSmoteandDraw(classifier, sm, X, y, title, year, testsmResult
     print("total time : ", end-start)
     logging.info(f"total time : {end-start}")
     cmall = [tp, fp, fn, tn]
-    return mean_acc, mean_recs, mean_precs, mean_f1s, mean_aucs, cmall, most_5, fold_infos
+    return mean_acc, mean_recs, mean_precs, mean_f1s, mean_aucs, cmall, most_5, fold_infos, best_model
 
 
 def XwithEliminatedLeastFeature(orig_data, featureNames):
@@ -238,8 +243,10 @@ def aTimeingThreePredictions(c_list, sm, X, y, timing, threshold):
         else:
             xgb_yes = False
         #predict
-        mean_acc, mean_recs, mean_precs, mean_f1s, mean_aucs, cmall, most_3, fold_infos = Print10foldScoreSmoteandDraw(c_list[i], sm, X, y, title_names[i], timing, testsmResult=False, testParameters=False, threshold=threshold, xgbClassifier=xgb_yes)
+        mean_acc, mean_recs, mean_precs, mean_f1s, mean_aucs, cmall, most_3, fold_infos, best_model = Print10foldScoreSmoteandDraw(c_list[i], sm, X, y, title_names[i], timing, testsmResult=False, testParameters=False, threshold=threshold, xgbClassifier=xgb_yes)
         big_result.loc[len(big_result.index)] = [mean_acc, mean_recs, mean_precs, mean_f1s, mean_aucs, cmall, fold_infos, most_3]
+        filename = 'C:/Users/oplab/Desktop/new_HBP_CICD/models/'+now[i]+'_model.sav'
+        pickle.dump(best_model, open(filename, 'wb'))
     
     #重新命名indeces
     index_names = [f"XGB_{timing}", f"RF_{timing}", f"DTB_{timing}"]

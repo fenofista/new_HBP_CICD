@@ -12,7 +12,7 @@ from cfg import DataPipeline_cfg as cfg
 import warnings
 import os
 import logging
-
+import pickle
 
 # In[] cfgs
 researchTopicName = cfg["researchTopicName"]
@@ -27,10 +27,22 @@ file_names = cfg['file_names']
 # In[] 產出一個類別檔案的不同時間段(四個長期or四個中短期)之X, y
 def makeXandY(dataName):
     data = pd.read_csv("C:/Users/oplab/Desktop/new_HBP_CICD/user_data/"+dataName)
+    drop_index=[]
+    for index in data.index:
+        try:
+            tmp = float(data["temp"].loc[index])
+            data["CV"].loc[index] = float(data["CV"].loc[index])-1
+            if data["CV"].loc[index]>=2:
+                drop_index.append(index)
+        except:
+            drop_index.append(index)
+    data = data.drop(drop_index)
+    data = data.reset_index()
+    data["temp"] = pd.to_numeric(data["temp"])
     col = [i for i in range(data.shape[1])]
-    col.pop(-1)
+    col.pop(2)
     X = data.iloc[:, col]
-    y = data.iloc[:, -1]
+    y = data.iloc[:, 2]
     return X, y
 
 

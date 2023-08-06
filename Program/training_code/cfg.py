@@ -27,9 +27,10 @@ DataPipeline_cfg = {
     #default
     'researchTopicName': "1369 with temperature",
     'c_list':[classifier, classifier2, classifier3],
-    'timing': ["1m_temp", '3m_temp', '6m_temp', '9m_temp'],
-    'file_names': [
-                   "cvd1m_temp.csv", "cvd3m_temp.csv", "cvd6m_temp.csv", "cvd9m_temp.csv"],
+    # 'timing': ["1m_temp", '3m_temp', '6m_temp', '9m_temp'],
+    # 'file_names': ["cvd1m_temp.csv", "cvd3m_temp.csv", "cvd6m_temp.csv", "cvd9m_temp.csv"],
+    'timing': ["T_for_AINA_2022_20230731"],
+    'file_names': ["T_for_AINA_2022_20230731.csv"],
     #after testParameters.py
     "sm": BorderlineSMOTE(random_state = 0, m_neighbors=2, k_neighbors=1), 
     'threshold': 0.56,
