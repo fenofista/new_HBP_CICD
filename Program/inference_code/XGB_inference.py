@@ -4,13 +4,24 @@ from sklearn.metrics import accuracy_score
 
 # Load the XGBoost model from the bst file
 model = xgb.Booster()
-model.load_model('C:/Users/oplab/Desktop/new_HBP_CICD/TCHC_CV_model/XGB_model.bst')
+model.load_model('C:/Users/oplab/Desktop/new_HBP_CICD/models/XBG_model.pkl')
 
 # Load the testing data from the CSV file
-test_data = pd.read_csv('C:/Users/oplab/Desktop/new_HBP_CICD/user_data/T_for_AINA_2022.csv')
-
+test_data = pd.read_csv('C:/Users/oplab/Desktop/new_HBP_CICD/user_data/T_for_AINA_2022_20230731.csv')
+drop_index=[]
+for index in test_data.index:
+    try:
+        tmp = float(test_data["temp"].loc[index])
+        test_data["CV"].loc[index] = float(test_data["CV"].loc[index])-1
+        if test_data["CV"].loc[index]>=2:
+            drop_index.append(index)
+    except:
+        drop_index.append(index)
+test_data = test_data.drop(drop_index)
+test_data = test_data.reset_index()
+test_data["temp"] = pd.to_numeric(test_data["temp"])
 # Extract the features from the testing data
-X_test = test_data.drop('CV', axis=1)  # Assuming 'label' column is the target variable
+X_test = test_data.drop('CV', axis=1) 
 
 # Make predictions on the testing data
 y_pred = model.predict(xgb.DMatrix(X_test))
