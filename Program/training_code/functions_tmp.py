@@ -245,7 +245,7 @@ def aTimeingThreePredictions(c_list, sm, X, y, timing, threshold):
         #predict
         mean_acc, mean_recs, mean_precs, mean_f1s, mean_aucs, cmall, most_3, fold_infos, best_model = Print10foldScoreSmoteandDraw(c_list[i], sm, X, y, title_names[i], timing, testsmResult=False, testParameters=False, threshold=threshold, xgbClassifier=xgb_yes)
         big_result.loc[len(big_result.index)] = [mean_acc, mean_recs, mean_precs, mean_f1s, mean_aucs, cmall, fold_infos, most_3]
-        filename = 'C:/Users/oplab/Desktop/new_HBP_CICD/models/'+now[i]+'_model.sav'
+        filename = 'C:/Users/oplab/Desktop/new_HBP_CICD/models/'+now[i]+'_model.pkl'
         pickle.dump(best_model, open(filename, 'wb'))
     
     #重新命名indeces
